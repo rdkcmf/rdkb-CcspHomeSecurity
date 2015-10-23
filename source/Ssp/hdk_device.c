@@ -254,7 +254,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+				return 0;
             }
             snprintf(tmpPath, sizeof(tmpPath), "%s.DomainName", pathVal);
 
@@ -273,7 +275,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.WPS.X_CISCO_COM_Pin", pathVal);
@@ -457,7 +461,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
 			if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.PrimaryLANDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
 			{
 				log_printf(LOG_ERR, "Can't get multilan Primary LAN DHCPv4 server pool \n");
-				return -1;
+				//return -1;
+				//zqiu: return 0 when error
+                return 0;
 			}
 
 			snprintf(tmpPath, sizeof(tmpPath), "%s.IPRouters", pathVal);
@@ -557,7 +563,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
             snprintf(tmpPath, sizeof(tmpPath), "%s.ClientNumberOfEntries", pathVal);
 
@@ -630,7 +638,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.IPRouters", pathVal);
@@ -653,7 +663,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.SubnetMask", pathVal);
@@ -676,7 +688,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Enable", pathVal);
@@ -706,7 +720,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.MinAddress", pathVal);
@@ -729,7 +745,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.MaxAddress", pathVal);
@@ -752,7 +770,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1; 
+				//zqiu: return 0 when error
+                return 0;
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.LeaseTime", pathVal);
@@ -777,7 +797,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.StaticAddress", pathVal);
@@ -846,6 +868,8 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (!pStr2)
             {
                 log_printf(LOG_ERR, "add Home Security RadioInfo error");
+		//zqiu: return 0 when error
+                return 0;
             }
 
             /* RadioID */
@@ -853,7 +877,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1005,7 +1031,16 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 if ((pStr3 = HDK_Set_Struct(pStr2, HDK_Element_PN_SupportedSecurity)) == NULL)
                     return 0;
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.ModesSupported", pathVal);
+                //zqiu
+  		        if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
+            	{
+                	log_printf(LOG_ERR, "Can't get multilan Home wifi AP\n");
+	                return 0;
+         	    }
+
+
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.ModesSupported", pathVal);
+
                 if (MBus_GetParamVal(mbus, tmpPath, val, sizeof(val)) != 0)
                     return 0;
 
@@ -1224,7 +1259,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1242,7 +1279,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Security.ModeEnabled", pathVal);
@@ -1402,7 +1441,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1420,7 +1461,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Security.ModeEnabled", pathVal);
@@ -1496,7 +1539,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1513,7 +1558,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Security.ModeEnabled", pathVal);
@@ -1572,7 +1619,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1616,7 +1665,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1686,7 +1737,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1729,7 +1782,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1767,7 +1822,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1811,7 +1868,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1860,7 +1919,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1898,7 +1959,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1942,7 +2005,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -1960,7 +2025,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.WMMEnable", pathVal);
@@ -2412,7 +2479,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2493,7 +2562,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2524,7 +2595,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2542,7 +2615,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiSsid", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi ssid\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.SSID", pathVal);
@@ -2564,7 +2639,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2581,7 +2658,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.SSIDAdvertisementEnabled", pathVal);
@@ -2603,7 +2682,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2671,7 +2752,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2714,7 +2797,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2760,7 +2845,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2782,7 +2869,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Security.RekeyingInterval", pathVal);
@@ -2808,7 +2897,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2826,7 +2917,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Security.RadiusServerIPAddr", pathVal);
@@ -2878,7 +2971,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2895,7 +2990,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Security.ModeEnabled", pathVal);
@@ -2920,7 +3017,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -2945,7 +3044,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Security.ModeEnabled", pathVal);
@@ -3051,7 +3152,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.Alias", pathVal);
@@ -3104,7 +3207,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiAp", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi access point\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             if (!strncmp(strVal, "WEP-", strlen("WEP-")))
@@ -3154,7 +3259,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityWiFiRadio", pathVal, sizeof(pathVal)) != 0)
             {
                 log_printf(LOG_ERR, "Can't get multilan Home wifi radio\n");
-                return -1;
+                //return -1;
+				//zqiu: return 0 when error
+                return 0;
             }
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.X_CISCO_COM_ApplySetting", pathVal);
@@ -3344,7 +3451,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 		
             snprintf(tmpPath, sizeof(tmpPath), "%s.IPRouters", pathVal);
@@ -3364,7 +3473,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             sprintf(tmpPath, sizeof(tmpPath), "%s.SubnetMask", pathVal);
@@ -3405,7 +3516,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.MinAddress", pathVal);
@@ -3423,7 +3536,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.MaxAddress", pathVal);
@@ -3443,7 +3558,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.LeaseTime", pathVal);
@@ -3456,7 +3573,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             if (MBus_GetParamVal(mbus, "Device.X_CISCO_COM_MultiLAN.HomeSecurityDHCPv4ServerPool", pathVal, sizeof(pathVal)) != 0)
             {   
                 log_printf(LOG_ERR, "Can't get multilan Home server pool\n");
-                return -1; 
+                //return -1;
+				//zqiu: return 0 when error
+                return 0; 
             }   
 
             snprintf(tmpPath, sizeof(tmpPath), "%s.StaticAddress.", pathVal);
