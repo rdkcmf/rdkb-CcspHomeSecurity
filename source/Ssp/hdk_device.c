@@ -1324,7 +1324,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_Bool(pStruct, HDK_Element_PN_Enabled, true);
                 HDK_Set_PN_WiFiSecurity(pStruct, HDK_Element_PN_Type, HDK_Enum_PN_WiFiSecurity_WPA_Personal);
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_CISCO_COM_KeyPassphrase", pathVal);
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 strcpy(val, "WPA-");
                 if (MBus_GetParamVal(mbus, tmpPath, val + strlen(val), sizeof(val) - strlen(val)) != 0)
                     return 0;
@@ -1336,7 +1336,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_Bool(pStruct, HDK_Element_PN_Enabled, true);
                 HDK_Set_PN_WiFiSecurity(pStruct, HDK_Element_PN_Type, HDK_Enum_PN_WiFiSecurity_WPA2_Personal);
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_CISCO_COM_KeyPassphrase", pathVal);
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 strcpy(val, "WPA-");
                 if (MBus_GetParamVal(mbus, tmpPath, val + strlen(val), sizeof(val) - strlen(val)) != 0)
                     return 0;
@@ -1348,7 +1348,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_Bool(pStruct, HDK_Element_PN_Enabled, true);
                 HDK_Set_PN_WiFiSecurity(pStruct, HDK_Element_PN_Type, HDK_Enum_PN_WiFiSecurity_WPA_WPA2_Personal);
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_CISCO_COM_KeyPassphrase", pathVal);
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 strcpy(val, "WPA-");
                 if (MBus_GetParamVal(mbus, tmpPath, val + strlen(val), sizeof(val) - strlen(val)) != 0)
                     return 0;
@@ -1360,7 +1360,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_Bool(pStruct, HDK_Element_PN_Enabled, true);
                 HDK_Set_PN_WiFiSecurity(pStruct, HDK_Element_PN_Type, HDK_Enum_PN_WiFiSecurity_WPA_Enterprise);
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_CISCO_COM_KeyPassphrase", pathVal);
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 strcpy(val, "WPA-");
                 if (MBus_GetParamVal(mbus, tmpPath, val + strlen(val), sizeof(val) - strlen(val)) != 0)
                     return 0;
@@ -1372,7 +1372,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_Bool(pStruct, HDK_Element_PN_Enabled, true);
                 HDK_Set_PN_WiFiSecurity(pStruct, HDK_Element_PN_Type, HDK_Enum_PN_WiFiSecurity_WPA2_Enterprise);
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_CISCO_COM_KeyPassphrase", pathVal);
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 strcpy(val, "WPA-");
                 if (MBus_GetParamVal(mbus, tmpPath, val + strlen(val), sizeof(val) - strlen(val)) != 0)
                     return 0;
@@ -1384,7 +1384,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_Bool(pStruct, HDK_Element_PN_Enabled, true);
                 HDK_Set_PN_WiFiSecurity(pStruct, HDK_Element_PN_Type, HDK_Enum_PN_WiFiSecurity_WPA_WPA2_Enterprise);
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_CISCO_COM_KeyPassphrase", pathVal);
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 strcpy(val, "WPA-");
                 if (MBus_GetParamVal(mbus, tmpPath, val + strlen(val), sizeof(val) - strlen(val)) != 0)
                     return 0;
@@ -1505,7 +1505,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             if (!GetWifiDataModel(mbus, strVal, &wifiDM))
                 return 0;
 
-            snprintf(tmpPath, sizeof(tmpPath), "%sX_CISCO_COM_KeyPassphrase", wifiDM.security);
+            snprintf(tmpPath, sizeof(tmpPath), "%sX_COMCAST-COM_KeyPassphrase", wifiDM.security);
             if (MBus_GetParamVal(mbus, tmpPath, val, sizeof(val)) != 0)
                 return 0;
 
@@ -3240,7 +3240,7 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
 					return 0;
 				}
 
-                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_CISCO_COM_KeyPassphrase", pathVal);
+                snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 if (MBus_SetParamVal(mbus, tmpPath, MBUS_PT_STRING, strVal + 4, 0) != 0)
                     return 0;
             }
