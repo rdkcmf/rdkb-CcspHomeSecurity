@@ -73,6 +73,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#define  MAX_STRING_LEN    256 /*RDKB-7468, CID-33129, max string len*/
 
 #if defined(HDK_METHOD_PN_SETDEVICESETTINGS2) || defined(HDK_METHOD_PN_SETROUTERLANSETTINGS2) || \
     defined(HDK_METHOD_PN_SETROUTERSETTINGS) || defined(HDK_METHOD_PN_SETWANSETTINGS)
@@ -368,8 +369,9 @@ void HDK_Method_PN_AddPortMapping(void* pDeviceCtx, HDK_Struct* pInput, HDK_Stru
 
     HDK_Struct sTemp;
     HDK_Struct_Init(&sTemp);
-    char tmp_str[256];
+    char tmp_str[MAX_STRING_LEN] = {0};
     int *val;
+    char* portMapDesc = NULL;
 
     val = HDK_Get_Int(pInput, HDK_Element_PN_InternalPort);
 
@@ -461,8 +463,16 @@ void HDK_Method_PN_AddPortMapping(void* pDeviceCtx, HDK_Struct* pInput, HDK_Stru
     /* Set the required elements */
     //add specific description prefix to distinguish them with other port forwarding rule, such as web gui and upnp 
     strcpy(tmp_str, "");
-    strncat(tmp_str, HDK_Get_String(pInput, HDK_Element_PN_PortMappingDescription), sizeof(tmp_str) - strlen(tmp_str) - 1);
-    tmp_str[sizeof(tmp_str) - 1] = '\0';
+    portMapDesc = HDK_Get_String(pInput, HDK_Element_PN_PortMappingDescription);/*RDKB-7468,CID-33129, may return null */
+    if(portMapDesc)/*RDKB-7468, CID-33129, null check before use */
+    {
+       strncat(tmp_str, portMapDesc, sizeof(tmp_str) - strlen(tmp_str) - 1);
+       tmp_str[sizeof(tmp_str) - 1] = '\0';
+    }
+    else
+    {
+        log_printf(LOG_ERR, "Error in getting PN Port Mapping Description \n");
+    }
     HDK_Set_String(psPortMapping, HDK_Element_PN_PortMappingDescription, tmp_str);
     HDK_Set_IPAddress(psPortMapping, HDK_Element_PN_InternalClient, pIpAddr);
     HDK_Set_PN_IPProtocol(psPortMapping, HDK_Element_PN_PortMappingProtocol, *peProtocol);
@@ -1247,6 +1257,9 @@ void HDK_Method_PN_SetDeviceSettings2(void* pDeviceCtx, HDK_Struct* pInput, HDK_
 {
     HDK_Struct sTemp;
     HDK_Struct_Init(&sTemp);
+    char* pPNTimeZone = HDK_Get_String(pInput, HDK_Element_PN_TimeZone); /*RDKB-7468, CID-32919, if null time zone may not be supported*/
+    char* psTempTimeZone = HDK_Get_String(&sTemp, HDK_Element_PN_TimeZone);
+    char* pPNUserName = HDK_Get_String(pInput, HDK_Element_PN_Username);
 
     /*
      * Check if setting the username is supported by the device. If not, then we need to
@@ -1257,7 +1270,7 @@ void HDK_Method_PN_SetDeviceSettings2(void* pDeviceCtx, HDK_Struct* pInput, HDK_
     {
         HDK_Device_GetValue(pDeviceCtx, &sTemp, HDK_DeviceValue_Username, 0);
 
-        if (strcmp(HDK_Get_String(pInput, HDK_Element_PN_Username), HDK_Get_StringEx(&sTemp, HDK_Element_PN_Username, "")))
+        if (!pPNUserName || strcmp(pPNUserName, HDK_Get_StringEx(&sTemp, HDK_Element_PN_Username, "")))
         {
             HDK_Set_Result(pOutput, HDK_Element_PN_SetDeviceSettings2Result, HDK_Enum_Result_ERROR_USERNAME_NOT_SUPPORTED);
             goto finish;
@@ -1273,8 +1286,8 @@ void HDK_Method_PN_SetDeviceSettings2(void* pDeviceCtx, HDK_Struct* pInput, HDK_
     {
         HDK_Device_GetValue(pDeviceCtx, &sTemp, HDK_DeviceValue_TimeZone, 0);
 
-        if (strcmp(HDK_Get_String(pInput, HDK_Element_PN_TimeZone), HDK_Get_String(&sTemp, HDK_Element_PN_TimeZone)) 
-			&& strcmp(HDK_Get_String(pInput, HDK_Element_PN_TimeZone), ""))
+        if (!pPNTimeZone || !psTempTimeZone || (strcmp(pPNTimeZone, psTempTimeZone) 
+            && strcmp(pPNTimeZone, "")))
         {
             HDK_Set_Result(pOutput, HDK_Element_PN_SetDeviceSettings2Result, HDK_Enum_Result_ERROR_TIMEZONE_NOT_SUPPORTED);
             goto finish;
@@ -1456,40 +1469,46 @@ void HDK_Method_PN_SetRouterLanSettings2(void* pDeviceCtx, HDK_Struct* pInput, H
             return;
         }
 
-        /* Iterate over the DHCP reservations */
-        for (pmDHCP1 = psDHCPs->pHead; pmDHCP1; pmDHCP1 = pmDHCP1->pNext)
+        /*RDKB-7468, CID-32917, null check before use */
+        if(psDHCPs)
         {
-            /*
-             * Validate the IP address of the DHCP reservation is in the device subnet.
-             */
-            pIp1 = HDK_Get_IPAddress(HDK_Get_StructMember(pmDHCP1), HDK_Element_PN_IPAddress);
-            if (!HDK_Util_ValidateIPSubnet(pRouterIP, pRouterSubnet, pIp1) ||
-                HDK_Util_AreIPsDuplicate(pRouterIP, pIp1))
+            /* Iterate over the DHCP reservations */
+            for (pmDHCP1 = psDHCPs->pHead; pmDHCP1; pmDHCP1 = pmDHCP1->pNext)
             {
-                HDK_Set_Result(pOutput, HDK_Element_PN_SetRouterLanSettings2Result, HDK_Enum_Result_ERROR_BAD_RESERVATION);
-                return;
-            }
-
-            /* Go through the DHCP reservations and validate that there are no duplicate IPs or MACs */
-            pMac1 = HDK_Get_MACAddress(HDK_Get_StructMember(pmDHCP1), HDK_Element_PN_MacAddress);
-            for (pmDHCP2 = psDHCPs->pHead; pmDHCP2; pmDHCP2 = pmDHCP2->pNext)
-            {
-                /* If it's the same DHCP member continue */
-                if (pmDHCP2 == pmDHCP1)
-                {
-                    continue;
-                }
-
-                pIp2 = HDK_Get_IPAddress(HDK_Get_StructMember(pmDHCP2), HDK_Element_PN_IPAddress);
-                pMac2 = HDK_Get_MACAddress(HDK_Get_StructMember(pmDHCP2), HDK_Element_PN_MacAddress);
-                if (HDK_Util_AreIPsDuplicate(pIp1, pIp2) || HDK_Util_AreMACsDuplicate(pMac1, pMac2))
+                /*
+                 * Validate the IP address of the DHCP reservation is in the device subnet.
+                 */
+                pIp1 = HDK_Get_IPAddress(HDK_Get_StructMember(pmDHCP1), HDK_Element_PN_IPAddress);
+                if (!HDK_Util_ValidateIPSubnet(pRouterIP, pRouterSubnet, pIp1) ||
+                    HDK_Util_AreIPsDuplicate(pRouterIP, pIp1))
                 {
                     HDK_Set_Result(pOutput, HDK_Element_PN_SetRouterLanSettings2Result, HDK_Enum_Result_ERROR_BAD_RESERVATION);
                     return;
                 }
+
+                /* Go through the DHCP reservations and validate that there are no duplicate IPs or MACs */
+                pMac1 = HDK_Get_MACAddress(HDK_Get_StructMember(pmDHCP1), HDK_Element_PN_MacAddress);
+                for (pmDHCP2 = psDHCPs->pHead; pmDHCP2; pmDHCP2 = pmDHCP2->pNext)
+                {
+                    /* If it's the same DHCP member continue */
+                    if (pmDHCP2 == pmDHCP1)
+                    {
+                        continue;
+                    }
+
+                    pIp2 = HDK_Get_IPAddress(HDK_Get_StructMember(pmDHCP2), HDK_Element_PN_IPAddress);
+                    pMac2 = HDK_Get_MACAddress(HDK_Get_StructMember(pmDHCP2), HDK_Element_PN_MacAddress);
+                    if (HDK_Util_AreIPsDuplicate(pIp1, pIp2) || HDK_Util_AreMACsDuplicate(pMac1, pMac2))
+                    {
+                        HDK_Set_Result(pOutput, HDK_Element_PN_SetRouterLanSettings2Result, HDK_Enum_Result_ERROR_BAD_RESERVATION);
+                        return;
+                    }
+                }
             }
         }
+
     }
+
     /* Validate the router ip and return correspond error if device rejects */
     if (!HDK_Device_ValidateValue(pDeviceCtx, HDK_DeviceValue_LanIPAddress, pInput))
     {
@@ -1533,9 +1552,10 @@ void HDK_Method_PN_SetRouterSettings(void* pDeviceCtx, HDK_Struct* pInput, HDK_S
     /* Initialize temprary struct */
     HDK_Struct sTemp;
     HDK_Struct_Init(&sTemp);
+    char* pPNDomainName = HDK_Get_String(pInput, HDK_Element_PN_DomainName); /*RDKB-7468, CID-32922, may return null, domain name not supported*/
 
     /* Check that the client is allowed to change the domain name if they are attempting to and validate */
-    if ((strcmp(HDK_Get_String(pInput, HDK_Element_PN_DomainName), "") &&
+    if ( !pPNDomainName || (strcmp(pPNDomainName, "") &&
          !HDK_Device_CheckValue(pDeviceCtx, HDK_DeviceValue_DomainNameChangeAllowed)) ||
         !HDK_Device_ValidateValue(pDeviceCtx, HDK_DeviceValue_DomainName, pInput))
     {
@@ -1819,7 +1839,8 @@ finish:
 void HDK_Method_PN_SetWLanRadioSecurity(void* pDeviceCtx, HDK_Struct* pInput, HDK_Struct* pOutput)
 {
     int* pfEnabled;
-    HDK_Enum_PN_WiFiSecurity eWiFiSecurity = *HDK_Get_PN_WiFiSecurity(pInput, HDK_Element_PN_Type);
+    HDK_Enum_PN_WiFiSecurity* pe = HDK_Get_PN_WiFiSecurity(pInput, HDK_Element_PN_Type);
+    HDK_Enum_PN_WiFiSecurity eWiFiSecurity = {0};
     HDK_Enum_PN_WiFiEncryption eWiFiEncryption = *HDK_Get_PN_WiFiEncryption(pInput, HDK_Element_PN_Encryption);
     HDK_Member* pmRadio = 0;
     HDK_Struct* psRadios;
@@ -1827,6 +1848,12 @@ void HDK_Method_PN_SetWLanRadioSecurity(void* pDeviceCtx, HDK_Struct* pInput, HD
 
     /* Initialize the temporary structure */
     HDK_Struct_Init(&sTemp);
+
+    /*RDKB-7468, CID-33009, null check before use */
+    if(pe)
+    {
+        memcpy(&eWiFiSecurity, pe, sizeof(HDK_Enum_PN_WiFiSecurity));
+    }
 
     /* First off, make sure this is a valid RadioID */
     HDK_Device_GetValue(pDeviceCtx, &sTemp, HDK_DeviceValue_RadioInfos, 0);
