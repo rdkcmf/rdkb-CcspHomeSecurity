@@ -80,7 +80,9 @@
 #include <net/if.h>
 #include <signal.h>
 
-
+#ifdef INCLUDE_BREAKPAD
+#include "breakpad_wrapper.h"
+#endif
 /*
  * HTTP_ParseHeaders - Parse the HTTP request headers
  */
@@ -400,7 +402,9 @@ int main(int argc, char *argv[])
 	char buf[4];
 
     openlog ("hs_log", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
-
+#ifdef INCLUDE_BREAKPAD
+    breakpad_ExceptionHandler();
+#endif
     /* Command line */
     if (argc < 2)
     {
