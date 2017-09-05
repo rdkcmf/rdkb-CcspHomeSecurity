@@ -3095,12 +3095,12 @@ typedef struct _HDK_MethodInfo
 } HDK_MethodInfo;
 
 static HDK_MethodInfo s_methods[] =
-{
-    { HDK_Method_PN_AddPortMapping, HDK_Element_PN_AddPortMapping, HDK_Element_PN_AddPortMappingResponse, HDK_Element_PN_AddPortMappingResult, 0x00 },
-    { HDK_Method_PN_DeletePortMapping, HDK_Element_PN_DeletePortMapping, HDK_Element_PN_DeletePortMappingResponse, HDK_Element_PN_DeletePortMappingResult, 0x00 },
-    { HDK_Method_PN_GetConnectedDevices, HDK_Element_PN_GetConnectedDevices, HDK_Element_PN_GetConnectedDevicesResponse, HDK_Element_PN_GetConnectedDevicesResult, 0x00 },
+{  // RDKB-9912
+   // { HDK_Method_PN_AddPortMapping, HDK_Element_PN_AddPortMapping, HDK_Element_PN_AddPortMappingResponse, HDK_Element_PN_AddPortMappingResult, 0x00 },
+   // { HDK_Method_PN_DeletePortMapping, HDK_Element_PN_DeletePortMapping, HDK_Element_PN_DeletePortMappingResponse, HDK_Element_PN_DeletePortMappingResult, 0x00 },
+   // { HDK_Method_PN_GetConnectedDevices, HDK_Element_PN_GetConnectedDevices, HDK_Element_PN_GetConnectedDevicesResponse, HDK_Element_PN_GetConnectedDevicesResult, 0x00 },
     { HDK_Method_PN_GetDeviceSettings, HDK_Element_PN_GetDeviceSettings, HDK_Element_PN_GetDeviceSettingsResponse, HDK_Element_PN_GetDeviceSettingsResult, 0x00 },
-    { HDK_Method_PN_GetPortMappings, HDK_Element_PN_GetPortMappings, HDK_Element_PN_GetPortMappingsResponse, HDK_Element_PN_GetPortMappingsResult, 0x00 },
+   /* { HDK_Method_PN_GetPortMappings, HDK_Element_PN_GetPortMappings, HDK_Element_PN_GetPortMappingsResponse, HDK_Element_PN_GetPortMappingsResult, 0x00 },
     { HDK_Method_PN_GetRouterLanSettings2, HDK_Element_PN_GetRouterLanSettings2, HDK_Element_PN_GetRouterLanSettings2Response, HDK_Element_PN_GetRouterLanSettings2Result, 0x00 },
     { HDK_Method_PN_GetRouterSettings, HDK_Element_PN_GetRouterSettings, HDK_Element_PN_GetRouterSettingsResponse, HDK_Element_PN_GetRouterSettingsResult, 0x00 },
     { HDK_Method_PN_GetWLanRadioSecurity, HDK_Element_PN_GetWLanRadioSecurity, HDK_Element_PN_GetWLanRadioSecurityResponse, HDK_Element_PN_GetWLanRadioSecurityResult, 0x00 },
@@ -3108,14 +3108,14 @@ static HDK_MethodInfo s_methods[] =
     { HDK_Method_PN_GetWLanRadios, HDK_Element_PN_GetWLanRadios, HDK_Element_PN_GetWLanRadiosResponse, HDK_Element_PN_GetWLanRadiosResult, 0x00 },
     { HDK_Method_PN_GetWanSettings, HDK_Element_PN_GetWanSettings, HDK_Element_PN_GetWanSettingsResponse, HDK_Element_PN_GetWanSettingsResult, 0x00 },
     { HDK_Method_PN_IsDeviceReady, HDK_Element_PN_IsDeviceReady, HDK_Element_PN_IsDeviceReadyResponse, HDK_Element_PN_IsDeviceReadyResult, 0x00 },
-    { HDK_Method_PN_Reboot, HDK_Element_PN_Reboot, HDK_Element_PN_RebootResponse, HDK_Element_PN_RebootResult, 0x00 },
+    { HDK_Method_PN_Reboot, HDK_Element_PN_Reboot, HDK_Element_PN_RebootResponse, HDK_Element_PN_RebootResult, 0x00 },*/
     { HDK_Method_PN_SetBridgeConnect, HDK_Element_PN_SetBridgeConnect, HDK_Element_PN_SetBridgeConnectResponse, HDK_Element_PN_SetBridgeConnectResult, 0x00 },
-    { HDK_Method_PN_SetDeviceSettings, HDK_Element_PN_SetDeviceSettings, HDK_Element_PN_SetDeviceSettingsResponse, HDK_Element_PN_SetDeviceSettingsResult, 0x00 },
+   /* { HDK_Method_PN_SetDeviceSettings, HDK_Element_PN_SetDeviceSettings, HDK_Element_PN_SetDeviceSettingsResponse, HDK_Element_PN_SetDeviceSettingsResult, 0x00 },
     { HDK_Method_PN_SetDeviceSettings2, HDK_Element_PN_SetDeviceSettings2, HDK_Element_PN_SetDeviceSettings2Response, HDK_Element_PN_SetDeviceSettings2Result, 0x00 },
     { HDK_Method_PN_SetRouterLanSettings2, HDK_Element_PN_SetRouterLanSettings2, HDK_Element_PN_SetRouterLanSettings2Response, HDK_Element_PN_SetRouterLanSettings2Result, 0x00 },
     { HDK_Method_PN_SetRouterSettings, HDK_Element_PN_SetRouterSettings, HDK_Element_PN_SetRouterSettingsResponse, HDK_Element_PN_SetRouterSettingsResult, 0x00 },
     { HDK_Method_PN_SetWLanRadioSecurity, HDK_Element_PN_SetWLanRadioSecurity, HDK_Element_PN_SetWLanRadioSecurityResponse, HDK_Element_PN_SetWLanRadioSecurityResult, 0x00 },
-    { HDK_Method_PN_SetWLanRadioSettings, HDK_Element_PN_SetWLanRadioSettings, HDK_Element_PN_SetWLanRadioSettingsResponse, HDK_Element_PN_SetWLanRadioSettingsResult, 0x00 },
+    { HDK_Method_PN_SetWLanRadioSettings, HDK_Element_PN_SetWLanRadioSettings, HDK_Element_PN_SetWLanRadioSettingsResponse, HDK_Element_PN_SetWLanRadioSettingsResult, 0x00 },*/
 };
 
 static HDK_MethodInfo* s_methods_FindFromElement(HDK_Element inputElement)
