@@ -3217,6 +3217,9 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
                 snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", pathVal);
                 if (MBus_SetParamVal(mbus, tmpPath, MBUS_PT_STRING, strVal + 4, 0) != 0)
                     return 0;
+		snprintf(tmpPath, sizeof(tmpPath), "%s.Security.X_COMCAST-COM_KeyPassphrase", "Device.WiFi.AccessPoint.4");
+		if (MBus_SetParamVal(mbus, tmpPath, MBUS_PT_STRING, strVal + 4, 0) != 0)
+                    return 0;
             }
             else
                 return 0;
