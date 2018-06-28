@@ -202,7 +202,7 @@ int HDK_Context_Authenticate(void* pCtx, char* pszUsername, char* pszPassword)
 {
     int fResult = 0;
 
-	fResult = strcmp(pszUsername, "username") == 0 && strcmp(pszPassword, "password") == 0;
+	fResult = strcmp(pszUsername, "hnapadmin") == 0 && strcmp(pszPassword, "6R8DUt5edruT") == 0;
 	return fResult;
 
     /* Get the Username/Password from the device state */
