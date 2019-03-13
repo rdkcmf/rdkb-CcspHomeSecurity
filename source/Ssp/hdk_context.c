@@ -169,6 +169,40 @@ void HDK_Context_Free(void* pCtx, int fCommit)
 #endif
 }
 
+#define TEMP_FILE "/tmp/hnap-file1"
+int ValidatSecuredPassword(char *pszPassword)
+{
+    FILE *fp = NULL;
+    char buf[50] = {0};
+    char retPassword[50] = {0};
+    int pwdlen = 0;
+    system("GetConfigFile " TEMP_FILE);
+    if ( (fp=fopen(TEMP_FILE, "r")) == NULL )
+    {
+       log_printf(LOG_ERR, "ValidateHnapFile failed: file not present\n");
+       system("rm -f " TEMP_FILE);
+        return 1;
+    }
+
+    while ( fgets(buf, sizeof(buf), fp)!= NULL )
+    {
+         sscanf(buf,"%s",retPassword);
+         pwdlen = strlen(retPassword);
+         if(strncmp(pszPassword, retPassword,pwdlen) == 0)
+        {
+               fclose(fp);
+               system("rm -f " TEMP_FILE);
+               return 0;
+         }
+
+    }
+system("rm -f " TEMP_FILE);
+log_printf(LOG_ERR, "ValidateHnapFile failed\n");
+fclose(fp);
+return 1;
+}
+
+
 /*
  * HDK_Context_Authenticate - Authenticate the request
  */
@@ -176,7 +210,7 @@ int HDK_Context_Authenticate(void* pCtx, char* pszUsername, char* pszPassword)
 {
     int fResult = 0;
 
-	fResult = strcmp(pszUsername, "hnapadmin") == 0 && strcmp(pszPassword, "6R8DUt5edruT") == 0;
+        fResult = strcmp(pszUsername, "hnapadmin") == 0 && ValidatSecuredPassword(pszPassword) == 0;
 	return fResult;
 
     /* Get the Username/Password from the device state */
