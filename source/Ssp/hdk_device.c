@@ -72,10 +72,10 @@ static void LoadMBusParam(MBusParam_t params[], int *index,
     (*index)++;
 }
 
-
+#if 0
 static bool stringtoip(char *s, HDK_IPAddress *ip)
 {
-	int i = 0;
+	
 	char *p1, *p2;
 	
 	if(s == NULL || ip == NULL)
@@ -114,6 +114,7 @@ static bool stringtoip(char *s, HDK_IPAddress *ip)
 	log_printf(LOG_INFO, "string %s, ip address %d.%d.%d.%d", s, ip->a, ip->b, ip->c, ip->d);
 	return true;
 }
+#endif
 
 /*
  * HDK Core glue (hdk_interface.h)
@@ -165,8 +166,6 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
     int boolVal;
     char *strVal;
     int start, end;
-    struct tm fmTm;
-    HDK_IPAddress ip;
 
     if ((hdkCtx = (HDK_Context *)pDeviceCtx) == NULL
             || (mbus = hdkCtx->mbus) == NULL)
@@ -2081,7 +2080,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
             }
 
             /* use first available Client instance */
-            snprintf(tmpPath, sizeof(tmpPath), "%IPAddress", insPath[i]);
+            snprintf(tmpPath, sizeof(tmpPath), "%sIPAddress", insPath[i]);
             if (MBus_GetParamVal(mbus, tmpPath, val, sizeof(val)) != 0)
                 return 0;
 			if (sscanf(val, "%hhu.%hhu.%hhu.%hhu", 
@@ -2242,10 +2241,8 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
     char pathVal[MAX_BUF];
     HDK_Struct *pStr1, *pStr2;
     HDK_Member *pMember;
-    HDK_Enum_PN_WANType *wanType;
     HDK_Enum_PN_WiFiMode *wifimode;
     HDK_Enum_PN_IPProtocol *ip_prot;
-    char key[32 + 1];
 	MBusParam_t paramsSet[MAX_PARAMS];
     int paramOff = 0;
 	struct itimerval time_val;
@@ -2356,7 +2353,7 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
 				}
 				j = 1;
                 //instancfe too many
-                if ((insNum + 1) >= NELEMS(insPath))
+                if ((insNum + 1) >= (int)NELEMS(insPath))
 				{
 					log_printf(LOG_ERR, "Too many port mapping rules\n");
 					MBus_DelObjectIns(mbus, "Device.NAT.PortMapping.", newIns);
@@ -3455,7 +3452,7 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
                 return 0; 
             }   
 
-            sprintf(tmpPath, sizeof(tmpPath), "%s.SubnetMask", pathVal);
+            snprintf(tmpPath, sizeof(tmpPath), "%s.SubnetMask", pathVal);
             snprintf(tmpBuf, sizeof(tmpBuf), "%u.%u.%u.%u", ipAddr->a, ipAddr->b, ipAddr->c, ipAddr->d);
 			
             if (MBus_SetParamVal(mbus, tmpPath, MBUS_PT_STRING, tmpBuf, 1) != 0)
@@ -3701,7 +3698,7 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
             break;
 
         default:
-            log_printf(LOG_ERR, "%s: unknow type");
+            log_printf(LOG_ERR, " unknown type\n");
             return 0;
     }
 
@@ -3716,8 +3713,6 @@ int HDK_Device_ValidateValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struc
     char *val;
     int *intval;
     /* float timeOfs; */
-    char tmpBuf[MAX_BUF];
-	int timeOfs;
 	HDK_Enum_PN_IPProtocol *ip_prot;
 
     if ((hdkCtx = (HDK_Context *)pDeviceCtx) == NULL || (mbus = hdkCtx->mbus) == NULL || !pStruct)

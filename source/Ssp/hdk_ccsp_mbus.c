@@ -50,6 +50,7 @@
 #include "hdk_ccsp_mbus.h"
 #include "ccsp_base_api.h"
 #include "ccsp_message_bus.h"
+#include "ansc_platform.h"
 
 enum {
     MBUS_GETPARAM,
@@ -73,7 +74,7 @@ struct MBusObj_s {
 static int 
 TypeTrans(MBusParamType_t iType, enum dataType_e *dType)
 {
-    int i;
+    UINT i;
     struct {
         MBusParamType_t iType;
         enum dataType_e dType;
@@ -358,7 +359,7 @@ MBus_SetParamVect(MBusObj_t *mbus, const char *object, const MBusParam_t params[
     int                     compNum = 0;
     char                    *peerCompId, *peerDbusPath;
     parameterValStruct_t    setStruct[20] = {{0}};
-    int                     i;
+    UINT                     i;
     char                    path[MAX_PATH_NAME];
     char                    *faultParam = NULL;
     int                     ret;
@@ -386,7 +387,7 @@ MBus_SetParamVect(MBusObj_t *mbus, const char *object, const MBusParam_t params[
     peerCompId = compStructs[0]->componentName;
     peerDbusPath = compStructs[0]->dbusPath;
 
-    for (i = 0; i < num && i < NELEMS(setStruct); i++)
+    for (i = 0; i < (UINT)num && i < NELEMS(setStruct); i++)
     {
         snprintf(path, sizeof(path), "%s%s", object, params[i].name);
         setStruct[i].parameterName = strdup(path);
@@ -420,6 +421,10 @@ MBus_SetParamVect(MBusObj_t *mbus, const char *object, const MBusParam_t params[
 int
 MBus_GetParamVect(MBusObj_t *mbus, const char *object, MBusParam_t *params[], int *num)
 {
+    UNREFERENCED_PARAMETER(mbus);
+    UNREFERENCED_PARAMETER(object);
+    UNREFERENCED_PARAMETER(params);
+    UNREFERENCED_PARAMETER(num);
     return -1;
 }
 
