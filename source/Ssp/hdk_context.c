@@ -46,6 +46,7 @@
 #include <string.h>
 #include "ccsp_base_api.h"
 #include "hdk_ccsp_mbus.h"
+#include "ansc_platform.h"
 
 //#ifdef defined(_COSA_DRG_CNS_) || defined(_COSA_DRG_TPG_)
 #if 1
@@ -230,5 +231,6 @@ int HDK_Context_Authenticate(void* pCtx, char* pszUsername, char* pszPassword)
 
 int HDK_Signal_Hander(int signal)
 {
+        UNREFERENCED_PARAMETER(signal);
 	return HDK_Stop_HomeSecurity_Bridge(ccsp_bus);
 }

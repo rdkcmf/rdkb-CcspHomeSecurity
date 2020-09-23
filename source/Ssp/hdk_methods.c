@@ -54,6 +54,8 @@
 
 
 
+#if defined(HDK_METHOD_CISCO_HOTSPOT_CHECKPARENTALCONTROLSPASSWORD) || defined(HDK_METHOD_CISCO_HOTSPOT_RESETPARENTALCONTROLSPASSWORD) || defined(HDK_METHOD_CISCO_HOTSPOT_SETPARENTALCONTROLSPASSWORD)
+
 static int checkPassword(const char* pass)
 {
 	int len = strlen(pass);
@@ -77,6 +79,7 @@ static int checkPassword(const char* pass)
 	return 0;
 }
 
+#endif
 /*
  * http://cisco.com/HNAPExt/HND/ActivateTMSSS
  */
