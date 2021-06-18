@@ -17,3 +17,8 @@
 # limitations under the License.
 ##########################################################################
 SUBDIRS = Ssp
+
+if WITH_GTEST_SUPPORT
+SUBDIRS += test
+endif
+
