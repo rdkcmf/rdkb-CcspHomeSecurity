@@ -155,7 +155,8 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
     char insPath[MAX_INSTANCE][MAX_PATH_NAME];
     char path[MAX_PATH_NAME];
     int insNum;
-    char tmpPath[MAX_PATH_NAME];
+    // extra length added to resolve format truncation
+    char tmpPath[MAX_PATH_NAME+44];
     char val[MAX_BUF];
     char pathVal[MAX_BUF];
     char *ptr, *saveptr;
@@ -387,7 +388,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 return 0;
             }
 
-            snprintf(tmpPath, MAX_PATH_NAME, "%sX_CISCO_COM_Password", insPath[0]);
+            snprintf(tmpPath, sizeof(tmpPath), "%sX_CISCO_COM_Password", insPath[0]);
             if (MBus_GetParamVal(mbus, tmpPath, val, sizeof(val)) != 0)
                 return 0;
 
@@ -2229,8 +2230,10 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
     char insPath[MAX_INSTANCE][MAX_PATH_NAME];
     int insNum, newIns, i, j;
     char *strVal;
-    char tmpPath[MAX_PATH_NAME];
-    char path[MAX_PATH_NAME];
+    // extra length added to resolve format truncation
+    char tmpPath[MAX_PATH_NAME+44];
+    // extra length added to resolve format overflow
+    char path[MAX_PATH_NAME+40];
     int *boolVal;
     int *intVal;
     HDK_IPAddress *ipAddr;
@@ -3340,7 +3343,7 @@ int HDK_Device_SetValue(void* pDeviceCtx, HDK_DeviceValue eValue, HDK_Struct* pS
 
             if ((strVal = HDK_Get_String(pStruct, HDK_Element_PN_AdminPassword)) == NULL)
                 return 0;
-            snprintf(tmpPath, MAX_PATH_NAME, "%sX_CISCO_COM_Password", insPath[0]);
+            snprintf(tmpPath, sizeof(tmpPath), "%sX_CISCO_COM_Password", insPath[0]);
             if (MBus_SetParamVal(mbus, tmpPath, MBUS_PT_STRING, strVal, 1) != 0)
                 return 0;
 
