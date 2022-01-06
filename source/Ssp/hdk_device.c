@@ -153,7 +153,9 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
     MBusObj_t *mbus;
     HDK_Struct *pStr1, *pStr2, *pStr3, *pStr4, *pStr5;
     char insPath[MAX_INSTANCE][MAX_PATH_NAME];
-    char path[MAX_PATH_NAME];
+    // extra length added to resolve format overflow
+    char path[MAX_PATH_NAME+32];
+    char tmpBuf[MAX_PATH_NAME];
     int insNum;
     // extra length added to resolve format truncation
     char tmpPath[MAX_PATH_NAME+44];
@@ -283,7 +285,8 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
 				 return 0;
              for (i = 0, j = 0; i < insNum; i++)
              {
-                sprintf(path, "%sInternalPort", insPath[i]);
+                strcpy(tmpBuf, insPath[i]);
+                sprintf(path, "%sInternalPort", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
 
@@ -291,7 +294,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 if (!strcmp(val, "0"))
                     continue;
 
-				sprintf(path, "%sInternalClient", insPath[i]);
+				sprintf(path, "%sInternalClient", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
 				
@@ -301,7 +304,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                     continue; 
                
 			    //Get port mapping protocol
-                sprintf(path, "%sProtocol", insPath[i]);
+                sprintf(path, "%sProtocol", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
 	
@@ -318,7 +321,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 //this rule is not for hnap 
                 if (strncmp(val, HOMESECURITY_NAME_PREFIX, strlen(HOMESECURITY_NAME_PREFIX)))
                     continue; 
-				*/				
+				*/
                
 					
                 if (j == 0)
@@ -336,14 +339,14 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
 					return 0;
                 
 				//Get port mapping Description
-				sprintf(path, "%sDescription", insPath[i]);
+				sprintf(path, "%sDescription", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
 
                 HDK_Set_String(pStr1, HDK_Element_PN_PortMappingDescription, val);
 
                 //Get port mapping internal client
-                sprintf(path, "%sInternalClient", insPath[i]);
+                sprintf(path, "%sInternalClient", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
 					
@@ -352,7 +355,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_IPAddress(pStr1, HDK_Element_PN_InternalClient, &ipAddr);
                 
 				//Get port mapping protocol
-                sprintf(path, "%sProtocol", insPath[i]);
+                sprintf(path, "%sProtocol", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
 
@@ -362,13 +365,13 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                     HDK_Set_PN_IPProtocol(pStr1, HDK_Element_PN_PortMappingProtocol, HDK_Enum_PN_IPProtocol_TCP);
                 
 				//Get port mapping internal port
-                sprintf(path, "%sInternalPort", insPath[i]);
+                sprintf(path, "%sInternalPort", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
                 HDK_Set_Int(pStr1, HDK_Element_PN_InternalPort, atoi(val));
 
                 //Get port mapping external port
-                sprintf(path, "%sExternalPort", insPath[i]);
+                sprintf(path, "%sExternalPort", tmpBuf);
                 if (MBus_GetParamVal(mbus, path, val, sizeof(val)) != 0)
                     return 0;
                 HDK_Set_Int(pStr1, HDK_Element_PN_ExternalPort, atoi(val));
@@ -793,13 +796,14 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                     return 0;
 
                 /* DeviceName */
-                snprintf(tmpPath, sizeof(tmpPath), "%sX_CISCO_COM_DeviceName", insPath[i]);
+                strcpy(tmpBuf, insPath[i]);
+                snprintf(tmpPath, sizeof(tmpPath), "%sX_CISCO_COM_DeviceName", tmpBuf);
                 if (MBus_GetParamVal(mbus, tmpPath, val, sizeof(val)) != 0)
                     return 0;
                 HDK_Set_String(pStr2, HDK_Element_PN_DeviceName, val);
 
                 /* IPAddress */
-                snprintf(tmpPath, sizeof(tmpPath), "%sYiaddr", insPath[i]);
+                snprintf(tmpPath, sizeof(tmpPath), "%sYiaddr", tmpBuf);
                 if (MBus_GetParamVal(mbus, tmpPath, val, sizeof(val)) != 0)
                     return 0;
 
@@ -809,7 +813,7 @@ int HDK_Device_GetValue(void* pDeviceCtx, HDK_Struct* pStruct, HDK_DeviceValue e
                 HDK_Set_IPAddress(pStr2, HDK_Element_PN_IPAddress, &ipAddr);
 
                 /* MacAddress */
-                snprintf(tmpPath, sizeof(tmpPath), "%sChaddr", insPath[i]);
+                snprintf(tmpPath, sizeof(tmpPath), "%sChaddr", tmpBuf);
                 if (MBus_GetParamVal(mbus, tmpPath, val, sizeof(val)) != 0)
                     return 0;
 
